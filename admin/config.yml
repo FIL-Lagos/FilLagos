@@ -1,0 +1,569 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  branch: main
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Home, key: 2268ff'
+            label: Text
+            name: 2268ff
+            widget: string
+          - hint: 'Original text: About, key: 3c2336d'
+            label: Text
+            name: 3c2336d
+            widget: string
+          - hint: 'Original text: Speakers, key: -7b61fb8c'
+            label: Text
+            name: '-7b61fb8c'
+            widget: string
+          - hint: 'Original text: Events, key: 7c6ccd39'
+            label: Text
+            name: 7c6ccd39
+            widget: string
+          - hint: 'Original text: FAQ, key: 10ef6'
+            label: Text
+            name: 10ef6
+            widget: string
+          - hint: 'Original text: Register Now, key: -5c16c827'
+            label: Text
+            name: '-5c16c827'
+            widget: string
+          - hint: 'Original text: FIL , key: 20ed57'
+            label: Text
+            name: 20ed57
+            widget: string
+          - hint: 'Original text: Lagos, key: 45ca2d6'
+            label: Text
+            name: 45ca2d6
+            widget: string
+          - hint: >-
+              Original text: 3 Days of learning, building and having fun, key:
+              2532e8da
+            label: Text
+            name: 2532e8da
+            widget: string
+          - hint: 'Original text: 31st March - 2nd April, 2023, key: -30a986f0'
+            label: Text
+            name: '-30a986f0'
+            widget: string
+          - hint: 'Original text: The Zone park, Gbagada, key: -783b6326'
+            label: Text
+            name: '-783b6326'
+            widget: string
+          - hint: 'Original text: FIL LAGOS, key: 192e6bdf'
+            label: Text
+            name: 192e6bdf
+            widget: string
+          - hint: >-
+              Original text: Step into the forefront of innovation! The Lagos
+              Filecoin Event is a dynamic gathering that fuels discussions on
+              decentralization and blockchain technology. Explore cutting-edge
+              advancements, connect with industry leaders, and play a vital role
+              in shaping the future of digital ecosystems. Dive into the heart
+              of Filecoin's transformative impact on decentralized storage,
+              elevate your understanding, network with pioneers, and embrace the
+              future at the Lagos Filecoin Event., key: -753d3051
+            label: Text
+            name: '-753d3051'
+            widget: text
+          - hint: 'Original text: SPEAKERS, key: -50966fac'
+            label: Text
+            name: '-50966fac'
+            widget: string
+          - hint: 'Original text: Discover, key: 1422dc09'
+            label: Text
+            name: 1422dc09
+            widget: string
+          - hint: 'Original text: Full Name, key: ff41d7c'
+            label: Text
+            name: ff41d7c
+            widget: string
+          - hint: 'Original text: Role at C, key: -7806c720'
+            label: Text
+            name: '-7806c720'
+            widget: string
+          - hint: 'Original text: ‍Previously: Company 1, Company 2, key: -149279c'
+            label: Text
+            name: '-149279c'
+            widget: string
+          - hint: 'Original text: Role at Company, key: 5341633a'
+            label: Text
+            name: 5341633a
+            widget: string
+          - hint: 'Original text: Previously: Company 1, Company 2, key: -5cbdd3a9'
+            label: Text
+            name: '-5cbdd3a9'
+            widget: string
+          - hint: 'Original text: EVENT SCHEDULE, key: 270f117d'
+            label: Text
+            name: 270f117d
+            widget: string
+          - hint: 'Original text: Explore, key: 15309273'
+            label: Text
+            name: '15309273'
+            widget: string
+          - hint: 'Original text: DATE, key: 1fe7ae'
+            label: Text
+            name: 1fe7ae
+            widget: string
+          - hint: 'Original text: TOPIC, key: 4c4d50f'
+            label: Text
+            name: 4c4d50f
+            widget: string
+          - hint: 'Original text: SPEAKER, key: -4cec1421'
+            label: Text
+            name: '-4cec1421'
+            widget: string
+          - hint: 'Original text: 10:00am - 11:00am, key: -7a4413e6'
+            label: Text
+            name: '-7a4413e6'
+            widget: string
+          - hint: 'Original text: Morning Session/Registration, key: -5368ad32'
+            label: Text
+            name: '-5368ad32'
+            widget: string
+          - hint: 'Original text: Road To Web3, key: -68594efc'
+            label: Text
+            name: '-68594efc'
+            widget: string
+          - hint: 'Original text: Blockchain UNN, key: 2e173929'
+            label: Text
+            name: '2e173929'
+            widget: string
+          - hint: 'Original text: 11:00am - 12:00pm, key: 6902a469'
+            label: Text
+            name: 6902a469
+            widget: string
+          - hint: >-
+              Original text: Blockchain 101 and Intro To Blockchain Development,
+              key: 623a3c9d
+            label: Text
+            name: 623a3c9d
+            widget: string
+          - hint: 'Original text: Blocverse, key: -53ea83c9'
+            label: Text
+            name: '-53ea83c9'
+            widget: string
+          - hint: 'Original text: 12:00pm - 1:00pm, key: -9f6f7dd'
+            label: Text
+            name: '-9f6f7dd'
+            widget: string
+          - hint: 'Original text: Brunch, key: 771d292e'
+            label: Text
+            name: 771d292e
+            widget: string
+          - hint: 'Original text: 1:00pm - 1:45pm, key: 6f440a74'
+            label: Text
+            name: 6f440a74
+            widget: string
+          - hint: 'Original text: Intro To IPFS, key: -d4c473b'
+            label: Text
+            name: '-d4c473b'
+            widget: string
+          - hint: 'Original text: Hector (IPFS), key: -2b320a64'
+            label: Text
+            name: '-2b320a64'
+            widget: string
+          - hint: 'Original text: 1:45pm - 2:30pm, key: 517cb0ce'
+            label: Text
+            name: 517cb0ce
+            widget: string
+          - hint: 'Original text: Intro To Filecoin, key: -3e3371c2'
+            label: Text
+            name: '-3e3371c2'
+            widget: string
+          - hint: 'Original text: Mosh (Filecoin), key: 2c73dc9d'
+            label: Text
+            name: 2c73dc9d
+            widget: string
+          - hint: 'Original text: 2:30pm - 3:30pm, key: -67ee4dae'
+            label: Text
+            name: '-67ee4dae'
+            widget: string
+          - hint: >-
+              Original text: #BuildWithFilecoin: Web3 for Cloud Native
+              Developers Why When How Why again###, key: 5f3fec8c
+            label: Text
+            name: 5f3fec8c
+            widget: string
+          - hint: 'Original text: David Aronchick, key: -2915b2b0'
+            label: Text
+            name: '-2915b2b0'
+            widget: string
+          - hint: 'Original text: 3:30pm - 4:30pm, key: -c5e0ace'
+            label: Text
+            name: '-c5e0ace'
+            widget: string
+          - hint: 'Original text: Intro To NFTs, key: -d4a2518'
+            label: Text
+            name: '-d4a2518'
+            widget: string
+          - hint: 'Original text: Yusef Napora, key: -7f9569b7'
+            label: Text
+            name: '-7f9569b7'
+            widget: string
+          - hint: 'Original text: 4:30pm - 5:15pm, key: 4f316219'
+            label: Text
+            name: 4f316219
+            widget: string
+          - hint: >-
+              Original text: NFT.Storage: Decentralized storage for NFTs, key:
+              7d3e4b5e
+            label: Text
+            name: 7d3e4b5e
+            widget: string
+          - hint: 'Original text: David Choi, key: 5230af6b'
+            label: Text
+            name: 5230af6b
+            widget: string
+          - hint: 'Original text: 5:15pm - 5:45pm, key: -d7fa8b0'
+            label: Text
+            name: '-d7fa8b0'
+            widget: string
+          - hint: >-
+              Original text: Upcoming Filecoin Projects: Filecoin Green, key:
+              -5481eee1
+            label: Text
+            name: '-5481eee1'
+            widget: string
+          - hint: 'Original text: Alan Ransil (Green), key: 46c2708d'
+            label: Text
+            name: 46c2708d
+            widget: string
+          - hint: 'Original text: 5:45pm- 6:15pm, key: 7017fc9b'
+            label: Text
+            name: 7017fc9b
+            widget: string
+          - hint: >-
+              Original text: #BuildWithFilecoin: Developing Dapps with Filecoin
+              1, key: -524105e9
+            label: Text
+            name: '-524105e9'
+            widget: string
+          - hint: 'Original text: Eniola & Tide, key: 5e0647cc'
+            label: Text
+            name: 5e0647cc
+            widget: string
+          - hint: 'Original text: Coding Challenge?, key: 70451ab2'
+            label: Text
+            name: 70451ab2
+            widget: string
+          - hint: 'Original text: Afternoon Session/ Lunch/ Pictures, key: e26498d'
+            label: Text
+            name: e26498d
+            widget: string
+          - hint: 'Original text: LEARN MORE, key: 552c03d1'
+            label: Text
+            name: 552c03d1
+            widget: string
+          - hint: 'Original text: OUR NETWORK, key: 21b3c91a'
+            label: Text
+            name: 21b3c91a
+            widget: string
+          - hint: 'Original text: filecoin.io, key: 46615ca7'
+            label: Text
+            name: 46615ca7
+            widget: string
+          - hint: 'Original text: fil.org, key: -330f0881'
+            label: Text
+            name: '-330f0881'
+            widget: string
+          - hint: 'Original text: protocol.ai, key: -18777cc2'
+            label: Text
+            name: '-18777cc2'
+            widget: string
+          - hint: 'Original text: Code of Conduct, key: -24630032'
+            label: Text
+            name: '-24630032'
+            widget: string
+          - hint: 'Original text: Privacy policy, key: -922d316'
+            label: Text
+            name: '-922d316'
+            widget: string
+          - hint: >-
+              Original text: Copyright © 2023 Filecoin Foundation, key:
+              -4ad5204b
+            label: Text
+            name: '-4ad5204b'
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: https://www.visitsouthafrica.com/, key: 6da2ac1a'
+            label: Link
+            name: 6da2ac1a
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: 1fd8101c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-38766184'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-72b9096a'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: d08bd4d
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-5f8bd8b0'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '48680019'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 4360af8
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
